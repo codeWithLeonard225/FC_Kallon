@@ -41,19 +41,25 @@ const HeroSection = () => {
         <div className="absolute inset-0 overflow-hidden">
           {slides[currentSlide].type === "video" ? (
             <video
-              src={slides[currentSlide].src}
               autoPlay
               loop
               muted
               playsInline
+              controls={false} // hide native controls
+              onContextMenu={(e) => e.preventDefault()} // disable right-click
+              preload="auto"
               className="w-full h-full object-cover"
-            />
+            >
+              <source src={slides[currentSlide].src} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           ) : (
             <div
               className="w-full h-full bg-no-repeat bg-center bg-cover"
               style={{ backgroundImage: `url(${slides[currentSlide].src})` }}
             ></div>
           )}
+
         </div>
 
         {/* Overlay */}
